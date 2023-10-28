@@ -6,15 +6,29 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const elem = (
-  <div>
-    <h2>Hello World!</h2>
-    <input type="text" placeholder="Type here"/>
-    <button/>
-  </div>
-);
+const Header = () => {
+  return <h2>Hello World!</h2>
+}
 
-root.render(elem);
+const Field = () => {
+  return <input type="text" placeholder="Type here"/>
+}
+
+const Button = () => {
+  return <button/>
+}
+
+const App = () => {
+  return (
+    <div>
+      <Header/>
+      <Field/>
+      <Button/>
+    </div>
+  )
+}
+
+root.render(<App/>);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
