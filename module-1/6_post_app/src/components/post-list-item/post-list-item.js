@@ -6,7 +6,7 @@ const PostListItem = ({label, important = false}) => {
     let classNames = 'app-list-item d-flex justify-content-between';
 
     return (
-        <li className={classNames + (important ? ' important' : '')}>
+        <div className={classNames + (important ? ' important' : '')}>
             <span className="app-list-item-label">
                 {label}
             </span>
@@ -22,7 +22,7 @@ const PostListItem = ({label, important = false}) => {
 
                 <i className="fa fa-heart"></i>
             </div>
-        </li>
+        </div>
     )
 }
 

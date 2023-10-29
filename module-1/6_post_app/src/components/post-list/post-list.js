@@ -4,12 +4,20 @@ import PostListItem from '../post-list-item'
 
 import '../../css/post-list.css'
 
-const PostList = () => {
+const PostList = ({posts}) => {
+    const elements = posts.map((post) => {
+        const {key, ...postProps} = post
+
+        return (
+            <li key={key} className="list-group-item">
+                <PostListItem {...postProps} />
+            </li>
+        )
+    })
+
     return (
         <ul className="post-list list-group">
-            <PostListItem label="Going to learn React" important />
-            <PostListItem label="That is so good!" />
-            <PostListItem label="I don't need a break" />
+            {elements}
         </ul>
     )
 }

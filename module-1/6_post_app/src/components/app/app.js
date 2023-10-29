@@ -9,6 +9,16 @@ import PostAddForm from '../post-add-form'
 import '../../css/app.css'
 
 const App = () => {
+    function randomUUID() {
+        return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    }
+
+    const data = [
+        {label: 'Going to learn React', important: true, key: randomUUID()},
+        {label: 'That is so good!', important: false, key: randomUUID()},
+        {label: 'I don\'t need a break.', important: false, key: randomUUID()} 
+    ]
+
     return (
         <div className="app">
             <AppHeader/>
@@ -17,7 +27,7 @@ const App = () => {
                 <PostStatusFilter/>
             </div>
 
-            <PostList/>
+            <PostList posts={data} />
             <PostAddForm/>
         </div>
     )
