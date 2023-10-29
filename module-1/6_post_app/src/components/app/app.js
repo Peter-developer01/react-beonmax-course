@@ -16,7 +16,8 @@ const App = () => {
     const data = [
         {label: 'Going to learn React', important: true, key: randomUUID()},
         {label: 'That is so good!', important: false, key: randomUUID()},
-        {label: 'I don\'t need a break.', important: false, key: randomUUID()} 
+        {label: 'I don\'t need a break.', important: false, key: randomUUID()},
+        "break the app"
     ]
 
     return (

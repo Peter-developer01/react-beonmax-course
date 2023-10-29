@@ -5,7 +5,8 @@ import PostListItem from '../post-list-item'
 import '../../css/post-list.css'
 
 const PostList = ({posts}) => {
-    const elements = posts.map((post) => {
+    let elements = posts.filter((post) => (typeof post === 'object' && post.key && post.label))
+    elements = elements.map((post) => {
         const {key, ...postProps} = post
 
         return (
