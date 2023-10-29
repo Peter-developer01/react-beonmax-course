@@ -6,8 +6,10 @@ export default class PostListItem extends Component {
     constructor(props) {
         super(props)
         this.onImportant = this.onImportant.bind(this)
+        this.onLike = this.onLike.bind(this)
         this.state = {
-            important: props.important
+            important: props.important,
+            like: false
         }
     }
 
@@ -17,14 +19,22 @@ export default class PostListItem extends Component {
         }))
     }
 
+    onLike() {
+        this.setState(({ like }) => ({
+            like: !like
+        }))
+    }
+
     render() {
         const { label } = this.props
-        const { important } = this.state
+        const { important, like } = this.state
         let classNames = 'app-list-item d-flex justify-content-between';
 
         return (
-            <div className={classNames + (important ? ' important' : '')}>
-                <span className="app-list-item-label">
+            <div className={classNames + (important ? ' important' : '') + (like ? ' like' : '')}>
+                <span
+                    className="app-list-item-label"
+                    onClick={this.onLike}>
                     {label}
                 </span>
 
