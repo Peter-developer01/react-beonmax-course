@@ -15,9 +15,9 @@ export default class App extends Component {
         super(props);
         this.state = {
             data: [
-                {label: 'Going to learn React', important: true, key: nextId()},
-                {label: 'That is so good!', important: false, key: nextId()},
-                {label: 'I don\'t need a break.', important: false, key: nextId()},
+                {label: 'Going to learn React', important: true, like: false, key: nextId()},
+                {label: 'That is so good!', important: false, like: false, key: nextId()},
+                {label: 'I don\'t need a break.', important: false, like: false, key: nextId()},
             ]
         };
     }
@@ -55,18 +55,51 @@ export default class App extends Component {
         })
     }
 
+    onToggleImportant = (key) => {
+        this.setState(({data}) => {
+            const index = data.findIndex(item => item.key === key)
+            const old = data[index]
+            const newItem = {...old, important: !old.important}
+            const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)]
+            return {
+                data: newArr
+            }
+        })
+    }
+
+    onToggleLiked = (key) => {
+        this.setState(({data}) => {
+            const index = data.findIndex(item => item.key === key)
+            const old = data[index]
+            const newItem = {...old, like: !old.like}
+            const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)]
+            return {
+                data: newArr
+            }
+        })
+    }
+
     render() {
+        const {data} = this.state
+        const liked = data.filter(item => item.like).length
+        const allPosts = data.length
+
         return (
             <div className="app">
-                <AppHeader/>
+                <AppHeader
+                    liked={liked}
+                    allPosts={allPosts}
+                />
                 <div className="search-panel d-flex">
                     <SearchPanel/>
                     <PostStatusFilter/>
                 </div>
 
                 <PostList
-                    posts={this.state.data}
+                    posts={data}
                     onDelete={this.deletePost}
+                    onToggleImportant={this.onToggleImportant}
+                    onToggleLiked={this.onToggleLiked}
                 />
 
                 <PostAddForm
