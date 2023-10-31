@@ -22,14 +22,7 @@ export default class App extends Component {
         };
     }
 
-    randomUUID() {
-        return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-    }
-
     deletePost = (key) => {
-        /* this.setState(({data}) => ({
-            data: data.filter(post => post.key !== key)
-        })); */
         this.setState(({data}) => {
             const index = data.findIndex(item => item.key === key)
             const before = data.slice(0, index)
