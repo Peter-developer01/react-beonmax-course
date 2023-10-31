@@ -38,6 +38,22 @@ export default class App extends Component {
         })
     }
 
+    addPost = (post) => {
+        console.log(post)
+        const newPost = {
+            label: post,
+            important: false,
+            key: this.randomUUID()
+        }
+
+        this.setState(({data}) => {
+            const newArr = [...data, newPost]
+            return {
+                data: newArr
+            }
+        })
+    }
+
     render() {
         return (
             <div className="app">
@@ -52,7 +68,9 @@ export default class App extends Component {
                     onDelete={this.deletePost}
                 />
 
-                <PostAddForm/>
+                <PostAddForm
+                    onAdd={this.addPost}
+                />
             </div>
         )
     }
