@@ -1,23 +1,51 @@
-import React from 'react'
+
+import React, { Component } from 'react'
 
 import '../../css/post-add-form.css'
 
-const PostAddForm = ({onAdd}) => {
-    return (
-        <div className="bottom-panel d-flex">
-            <input
-                type="text"
-                placeholder="О чём вы думаете сейчас?"
-                className="form-control new-post-label"
-            />
-            <button
-                className="btn btn-outline-secondary"
-                type="submit"
-                onClick={() => onAdd('Hello')}>
-                Добавить
-            </button>
-        </div>
-    )
-}
+export default class PostAddForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            label: ''
+        }
 
-export default PostAddForm
+        this.onInput = this.onInput.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
+    }
+
+    onInput(label) {
+        this.setState({
+            label
+        })
+    }
+
+    onSubmit(event, label) {
+        event.preventDefault()
+        this.props.onAdd(label)
+        this.setState(() => ({
+            label: ''
+        }))
+    }
+
+    render() {
+        return (
+            <form
+                className="bottom-panel d-flex"
+                onSubmit={(event) => this.onSubmit(event, this.state.label)}>
+                <input
+                    type="text"
+                    placeholder="О чём вы думаете сейчас?"
+                    value={this.state.label}
+                    className="form-control new-post-label"
+                    onInput={(e) => this.onInput(e.target.value)}
+                />
+                <button
+                    className="btn btn-outline-secondary"
+                    type="submit">
+                    Добавить
+                </button>
+            </form>
+        )
+    }
+}
