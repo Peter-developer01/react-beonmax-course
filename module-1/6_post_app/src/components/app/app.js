@@ -8,14 +8,16 @@ import PostAddForm from '../post-add-form'
 
 import '../../css/app.css'
 
+import nextId from 'react-id-generator';
+
 export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [
-                {label: 'Going to learn React', important: true, key: this.randomUUID()},
-                {label: 'That is so good!', important: false, key: this.randomUUID()},
-                {label: 'I don\'t need a break.', important: false, key: this.randomUUID()},
+                {label: 'Going to learn React', important: true, key: nextId()},
+                {label: 'That is so good!', important: false, key: nextId()},
+                {label: 'I don\'t need a break.', important: false, key: nextId()},
             ]
         };
     }
@@ -39,11 +41,10 @@ export default class App extends Component {
     }
 
     addPost = (post) => {
-        console.log(post)
         const newPost = {
             label: post,
             important: false,
-            key: this.randomUUID()
+            key: nextId()
         }
 
         this.setState(({data}) => {
