@@ -20,6 +20,7 @@ export default class App extends Component {
                 {label: 'I don\'t need a break.', important: false, like: false, key: nextId()},
             ],
             searchTerm: '',
+            filter: 'all',
         };
     }
 
@@ -77,6 +78,10 @@ export default class App extends Component {
         this.setState({searchTerm})
     }
 
+    onFilterSelect = (filter) => {
+        this.setState({filter})
+    }
+
     searchPost(items, term) {
         if (term.length === 0) {
             return items
@@ -87,11 +92,19 @@ export default class App extends Component {
         })
     }
 
+    filterPost(items, filter) {
+        if (filter === 'like') {
+            return items.filter(item => item.like)
+        } else {
+            return items
+        }
+    }
+
     render() {
-        const {data, searchTerm} = this.state
+        const {data, searchTerm, filter} = this.state
         const liked = data.filter(item => item.like).length
         const allPosts = data.length
-        const visiblePosts = this.searchPost(data, searchTerm)
+        const visiblePosts = this.filterPost(this.searchPost(data, searchTerm), filter)
 
         return (
             <div className="app">
@@ -103,7 +116,10 @@ export default class App extends Component {
                     <SearchPanel
                         onUpdateSearch={this.onUpdateSearch}
                     />
-                    <PostStatusFilter/>
+                    <PostStatusFilter
+                        filter={filter}
+                        onFilterSelect={this.onFilterSelect}
+                    />
                 </div>
 
                 <PostList
