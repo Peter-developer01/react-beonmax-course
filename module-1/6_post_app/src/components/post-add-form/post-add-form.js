@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 
 import '../../css/post-add-form.css'
